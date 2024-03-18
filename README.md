@@ -6,7 +6,7 @@ A project created via the Flutter framework.
 
 This project is a Task Manager application.
 
-A few resources to get you started if this is your first Flutter project:
+A few resources to get you started if this is your first encounter with a Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
