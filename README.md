@@ -1,6 +1,6 @@
 # task_management_system
 
-A new Flutter project.
+A project created via the Flutter framework.
 
 ## Getting Started
 
