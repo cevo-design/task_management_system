@@ -52,14 +52,28 @@ class _AddNewTaskState extends State<AddNewTask> {
             const Spacer(),
             ElevatedButton(
               onPressed: () {
-                CollectionReference collRef =
-                    FirebaseFirestore.instance.collection('Task Details');
-                collRef.add({
-                  'Title': _titleController.text,
-                  'Description': _descriptionController.text,
-                  'Due Date': _dateController.text,
-                });
-                Navigator.pop(context);
+                if (_titleController.text.isEmpty ||
+                    _descriptionController.text.isEmpty ||
+                    _dateController.text.isEmpty) {
+                  showDialog(
+                      context: context,
+                      builder: (ctx) {
+                        return const AlertDialog(
+                          title: Text('Alert!'),
+                          content: Text('Please ensure to provide all fields'),
+                        );
+                      });
+                  Navigator.pop(context);
+                } else {
+                  CollectionReference collRef =
+                      FirebaseFirestore.instance.collection('Task Details');
+                  collRef.add({
+                    'Title': _titleController.text,
+                    'Description': _descriptionController.text,
+                    'Due Date': _dateController.text,
+                  });
+                  Navigator.pop(context);
+                }
               },
               child: const Text('Add Task'),
             ),

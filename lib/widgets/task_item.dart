@@ -10,6 +10,7 @@ class TaskItem extends StatefulWidget {
 
 class _TaskItemState extends State<TaskItem> {
   bool? isComplete = false;
+  List<bool> checkValue = List<bool>.filled(12, false);
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +40,48 @@ class _TaskItemState extends State<TaskItem> {
                               Text('Task: ${task['Title']}'),
                               Text('Description: ${task['Description']}'),
                               Text('Due Date: ${task['Due Date']}'),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return AlertDialog(
+                                        title: const Text('Task Details:'),
+                                        content: Column(
+                                          children: [
+                                            Text('Task: ${task['Title']}'),
+                                            Text(
+                                                'Description: ${task['Description']}'),
+                                            Text(
+                                                'Due Date: ${task['Due Date']}'),
+                                            Text(
+                                                'Status ${checkValue[tasks.indexOf(task)] ? 'Complete' : 'Ongoing'}'),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const Text('View Details'),
+                              ),
                             ],
                           ),
                           const Spacer(),
-                          Checkbox(
-                            value: isComplete,
-                            onChanged: (checked) {
-                              setState(() {
-                                isComplete = checked;
-                              });
-                            },
+                          Row(
+                            children: [
+                              const Text('Complete'),
+                              Checkbox(
+                                value: checkValue[tasks.indexOf(task)],
+                                onChanged: (checked) {
+                                  setState(() {
+                                    checkValue[tasks.indexOf(task)] = checked!;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
